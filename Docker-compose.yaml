@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  mysql:
+    container_name: mysql8
+    image: mysql/mysql-server:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/docker_workspace/mysql:/var/lib/mysql

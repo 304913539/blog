@@ -1,0 +1,43 @@
+Server:
+  RunMode: debug
+  HttpPort: 8000
+  ReadTimeout: 60
+  WriteTimeout: 60
+App:
+  DefaultPageSize: 10
+  MaxPageSize: 100
+  LogSavePath: storage/logs
+  LogFileName: app
+  LogFileExt: .log
+  UploadSavePath: storage/uploads
+  UploadServerUrl: http://127.0.0.1:8000/static
+  UploadImageMaxSize: 5  # MB
+  UploadImageAllowExts:
+    - .jpg
+    - .jpeg
+    - .png
+  DefaultContextTimeout: 1m
+Database:
+  DBType: mysql
+  Username: root  # 填写你的数据库账号
+  Password: root  # 填写你的数据库密码
+  Host: 127.0.0.1:3306
+  DBName: blog
+  TablePrefix: blog_
+  Charset: utf8mb4
+  ParseTime: true
+  MaxIdleConns: 10
+  MaxOpenConns: 30
+JWT:
+  Secret: eddycjy
+  Issuer: blog-service
+  Expire: 24h
+Email:
+  Host: smtp.qq.com
+  Port: 465
+  UserName: 304913539@qq.com
+  Password: dcziwqkkhyvocbdf
+  IsSSL: true
+  From: 304913539@qq.com
+  To:
+    - 304913539@qq.com
