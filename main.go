@@ -73,6 +73,10 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+	err = newSetting.ReadSection("BaiduChat", &global.BaiduChat)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

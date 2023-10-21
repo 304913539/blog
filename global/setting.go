@@ -12,4 +12,5 @@ var (
 	Logger          *logger.Logger
 	JWTSetting      *setting.JWTSettingS
 	EmailSetting    *setting.EmailSettingS
+	BaiduChat       *setting.BaiduChat
 )
