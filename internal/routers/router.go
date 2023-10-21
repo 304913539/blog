@@ -1,15 +1,12 @@
 package routers
 
 import (
-	_ "blog-service/docs"
 	"blog-service/global"
 	"blog-service/internal/middleware"
 	"blog-service/internal/routers/api"
 	v1 "blog-service/internal/routers/api/v1"
 	"blog-service/pkg/limiter"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 	"time"
 )
 
@@ -26,7 +23,8 @@ func NewRouter() *gin.Engine {
 	//	r.Use(gin.Logger())
 	//	r.Use(gin.Recovery())
 	//} else {
-	r.Use(middleware.AccessLog()) //请求日志
+	r.Use(middleware.CorsMiddleware()) //跨域设置
+	r.Use(middleware.AccessLog())      //请求日志
 	r.Use(middleware.Recovery())
 	//}
 	r.Use(middleware.RateLimiter(methodLimiters))                             //限流
@@ -34,14 +32,13 @@ func NewRouter() *gin.Engine {
 
 	r.POST("/auth", api.GetAuth)
 
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
 	//upload := v1.NewUpload()
 	//r.POST("/upload/file", upload.UploadFile)
 	//r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
 
 	tag := v1.NewTag()
 	article := v1.NewArticle()
+	chat := v1.NewChat()
 
 	apiv1 := r.Group("/api/v1").Use(middleware.JWT())
 	{
@@ -59,6 +56,8 @@ func NewRouter() *gin.Engine {
 		apiv1.GET("/articles/:id", article.Get)
 		apiv1.GET("/articles", article.List)
 	}
+	r.POST("/session", chat.Session)
+	r.POST("/chat-process", chat.ChatProcess)
 
 	return r
 }

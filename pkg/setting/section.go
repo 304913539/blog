@@ -50,6 +50,10 @@ type EmailSettingS struct {
 	From     string
 	To       []string
 }
+type BaiduChat struct {
+	ApiKey    string
+	SecretKey string
+}
 
 func (s *Setting) ReadSection(k string, v interface{}) error {
 	err := s.vp.UnmarshalKey(k, v)
