@@ -34,6 +34,6 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 	if global.ServerSetting.RunMode == "debug" {
 		db.Logger.LogMode(logger.Info)
 	}
-	db.AutoMigrate(&Tag{}, &Article{}, &ArticleTag{}, &Auth{})
+	db.AutoMigrate(&Tag{}, &Article{}, &ArticleTag{}, &Auth{}, &Message{}, &Conversation{})
 	return db, nil
 }
